@@ -14,21 +14,24 @@ namespace SupportBank
             List<string> namesList = GenerateNameList(transactions2014);
             while (true)
             {
-                Console.Write("\nType: \n'List All' To output all people and amounts \n'List [Account]' to to print all transactions \n");
-                var input  = Console.ReadLine();
-                string[] inputList = input.Split(" ");
+                Console.Write(
+                    "\nType: \n'List All' To output all people and amounts \n'List [Account]' to to print all transactions \n");
+                var input = Console.ReadLine();
+                List<string> inputList = input.Split(" ").ToList();
                 if (inputList[0] == $"List")
-                    if (inputList[1] == "All")
+                {
+                    inputList.Remove("List");
+                    string inputName = string.Join(" ", inputList.ToArray());
+                    if (inputName == "All")
                     {
                         PrintAccounts(transactions2014, namesList);
                     }
 
-                if (inputList.Contains(inputList[1]))
-                {
-                    // Print their history
+                    if (namesList.Contains(inputName))
+                    {
+                        Console.Write("Here is the transaction data for {0}", inputName);
+                    }
                 }
-                
-                
             }
         }
 
