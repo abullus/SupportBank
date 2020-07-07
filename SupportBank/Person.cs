@@ -27,7 +27,7 @@ namespace SupportBank
                     string date = transactions[i, 0];
                     string narrative = transactions[i, 3];
                     string amount = transactions[i, 4];
-                    Console.Write($"Date: {date} \n"+personMessage+$"\nAmount: {amount} \nNarrative: {narrative}");
+                    Console.Write($"\n\nDate: {date}"+personMessage+$"\nAmount: {amount} \nNarrative: {narrative}");
                 }
             }
         }

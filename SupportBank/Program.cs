@@ -15,7 +15,7 @@ namespace SupportBank
             while (true)
             {
                 Console.Write(
-                    "\nType: \n'List All' To output all people and amounts \n'List [Account]' to to print all transactions \n");
+                    "\n\nType: \n'List All' To output all people and amounts \n'List [Account]' to to print all transactions \n");
                 var input = Console.ReadLine();
                 List<string> inputList = input.Split(" ").ToList();
                 if (inputList[0] == $"List")
