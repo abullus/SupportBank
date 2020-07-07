@@ -10,7 +10,7 @@ namespace SupportBank
         static void Main(string[] args)
         {
             string filename = @"C:\Work\Training\SupportBank\Transactions2014.csv"; 
-            string[,] transactions2014 = LoadCSV(filename);
+            string[,] transactions2014 = LoadCsv(filename);
             List<string> namesList = GenerateNameList(transactions2014);
             while (true)
             {
@@ -30,6 +30,10 @@ namespace SupportBank
                     if (namesList.Contains(inputName))
                     {
                         Console.Write("Here is the transaction data for {0}", inputName);
+                        Person person1 = new Person();
+                        person1.name = inputName;
+                        person1.printTransactions(transactions2014); ;
+                        
                     }
                 }
             }
@@ -71,7 +75,7 @@ namespace SupportBank
                 Console.Write("\n {0} has an account value of {1}",entry.Key,entry.Value);
             }
         }
-        private static string[,] LoadCSV(string filename)
+        private static string[,] LoadCsv(string filename)
         {
             {
                 // Get the data
