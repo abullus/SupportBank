@@ -8,16 +8,18 @@ namespace SupportBank
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         
-        public static Dictionary<string, Person> PeopleDictionary;
+        public readonly Dictionary<string, Person> PeopleDictionary = new Dictionary<string, Person>();
         
-        public PeopleDictionaryCreator()
+        public void AddListToDict(List<Transaction> transactionList)
         {
-            var dict = new Dictionary<string, Person>();
-            PeopleDictionary = dict;
-            logger.Info("Created dictionary");
+            foreach (var thisTransaction in transactionList)
+            {
+                AddToDict(thisTransaction.From, -thisTransaction.Amount, thisTransaction);
+                AddToDict(thisTransaction.To, thisTransaction.Amount, thisTransaction);
+            }
         }
         
-        public static void AddToDict(string name, float amount, Transaction thisTransaction)
+        private void AddToDict(string name, float amount, Transaction thisTransaction)
         {
             if (!PeopleDictionary.ContainsKey(name)) PeopleDictionary.Add(name, new Person(name));
             PeopleDictionary[name].ChangeBalance(amount);
