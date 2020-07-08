@@ -8,8 +8,10 @@ namespace SupportBank
     {
         private static void Main()
         {
-            var filename = @"C:\Work\Training\SupportBank\Transactions2014.csv";
-            var dict = new Csvreader(filename).DataFile;
+            var peopleDictionaryCreator = new PeopleDictionaryCreator();
+            peopleDictionaryCreator.AddStringsToDictionary(new CsvReader(@"C:\Work\Training\SupportBank\Transactions2014.csv").TransactionList);
+            //peopleDictionaryCreator.AddStringsToDictionary(new Csvreader(@"C:\Work\Training\SupportBank\DodgyTransactions2015").TransactionList);
+            var peopleDictionary = peopleDictionaryCreator.PeopleDictionary;
             while (true)
             {
                 Console.Write(
@@ -20,8 +22,8 @@ namespace SupportBank
                     input.Remove("List");
                     var inputName = string.Join(" ", input.ToArray());
                     
-                    if (inputName == "All") PrintAllBalances(dict);
-                    else if (dict.ContainsKey(inputName)) PrintTransactions(dict[inputName]);
+                    if (inputName == "All") PrintAllBalances(peopleDictionary);
+                    else if (peopleDictionary.ContainsKey(inputName)) PrintTransactions(peopleDictionary[inputName]);
                     else Console.Write("\nPlease enter a valid name");
                 }
                 else Console.Write("\nPlease enter a valid command");
@@ -39,17 +41,17 @@ namespace SupportBank
             }
         }
 
-        private static void PrintTransactions(Person name)
+        private static void PrintTransactions(Person person)
         {
-            Console.Write($"Here are the transactions for {name.Name}:");
-            foreach (var transaction in name.Transactions)
+            Console.Write($"Here are the transactions for {person.Name}:");
+            foreach (var transaction in person.Transactions)
                 Console.Write("\n\nDate: " + transaction.Date +
                               "\nFrom: " + transaction.From +
                               "\nTo: " + transaction.To +
                               "\nNarrative: " + transaction.Narrative +
                               "\nValue: " + transaction.Amount);
 
-            Console.Write("\n\nTheir current balance is £" + name.Balance);
+            Console.Write("\n\nTheir current balance is £" + person.Balance);
         }
     }
 }

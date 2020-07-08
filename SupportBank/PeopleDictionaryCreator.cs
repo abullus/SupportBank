@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 
 namespace SupportBank
 {
-    internal class Csvreader
+    public class PeopleDictionaryCreator
     {
-        public readonly Dictionary<string, Person> DataFile;
+        public Dictionary<string, Person> PeopleDictionary;
 
-        public Csvreader(string filename)
+        public PeopleDictionaryCreator()
         {
-            var lines = File.ReadAllLines(filename);
             var dict = new Dictionary<string, Person>();
+            PeopleDictionary = dict;
+        }
+
+        public void AddStringsToDictionary(string[] lines)
+        {
             for (var i = 1; i < lines.Length; i++)
             {
                 var lineArray = lines[i].Split(',');
@@ -23,11 +26,9 @@ namespace SupportBank
                     Narrative = lineArray[3],
                     Amount = float.Parse(lineArray[4])
                 };
-                AddToDict(dict, thisTransaction.From, -thisTransaction.Amount, thisTransaction);
-                AddToDict(dict, thisTransaction.To, thisTransaction.Amount, thisTransaction);
+                AddToDict(PeopleDictionary, thisTransaction.From, -thisTransaction.Amount, thisTransaction);
+                AddToDict(PeopleDictionary, thisTransaction.To, thisTransaction.Amount, thisTransaction);
             }
-
-            DataFile = dict;
         }
 
         private void AddToDict(Dictionary<string, Person> dict, string name, float amount, Transaction thisTransaction)
