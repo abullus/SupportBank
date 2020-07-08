@@ -16,7 +16,7 @@ namespace SupportBank
             var config = new LoggingConfiguration();
             var target = new FileTarget { FileName = @"C:\Work\Training\SupportBank\SupportBank.log", Layout = @"${longdate} ${level} - ${logger}: ${message}" };
             config.AddTarget("File Logger", target);
-            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
+            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, target));
             LogManager.Configuration = config;
             logger.Info("Program Initiated");
             
@@ -44,7 +44,7 @@ namespace SupportBank
                     else Console.Write("\nPlease enter a valid name");
                 }
                 else Console.Write("\nPlease enter a valid command");
-                logger.Info($"{input[0]} processed");
+                logger.Info($"User input processed");
             }
         }
 
