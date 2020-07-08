@@ -19,14 +19,12 @@ namespace SupportBank
                 {
                     input.Remove("List");
                     var inputName = string.Join(" ", input.ToArray());
+                    
                     if (inputName == "All") PrintAllBalances(dict);
-
-                    if (dict.ContainsKey(inputName))
-                    {
-                        Console.Write("Here is the transaction data for {0}", inputName);
-                        PrintTransactions(dict[inputName]);
-                    }
+                    else if (dict.ContainsKey(inputName)) PrintTransactions(dict[inputName]);
+                    else Console.Write("\nPlease enter a valid name");
                 }
+                else Console.Write("\nPlease enter a valid command");
             }
         }
 
@@ -49,9 +47,9 @@ namespace SupportBank
                               "\nFrom: " + transaction.From +
                               "\nTo: " + transaction.To +
                               "\nNarrative: " + transaction.Narrative +
-                              "\nValue: " + transaction.From);
+                              "\nValue: " + transaction.Amount);
 
-            Console.Write("Their current balance is" + name.Balance);
+            Console.Write("\n\nTheir current balance is £" + name.Balance);
         }
     }
 }

@@ -5,8 +5,8 @@ namespace SupportBank
     public class Person
     {
         public float Balance;
-        public string Name;
-        public List<Transaction> Transactions;
+        public readonly string Name;
+        public readonly List<Transaction> Transactions;
 
         public Person(string name)
         {
