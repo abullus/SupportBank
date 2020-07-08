@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -22,14 +25,16 @@ namespace SupportBank
             
             var peopleDictionaryCreator = new PeopleDictionaryCreator();
             var csvReader = new CsvReader();
+            var jsonReader = new JsonReader();
+            jsonReader.AddJSONFile(@"C:\Work\Training\SupportBank\Transactions2013.json");
             csvReader.AddCSVFile(@"C:\Work\Training\SupportBank\Transactions2014.csv");
             csvReader.AddCSVFile(@"C:\Work\Training\SupportBank\DodgyTransactions2015.csv");
-
+            
+            
             logger.Info("Added all data to dictionary");
             while (true)
             {
-                Console.Write(
-                    "\n\nType: \n'List All' To output all people and amounts \n'List [Account]' to to print all transactions \n");
+                Console.Write("\n\nType: \n'List All' To output all people and amounts \n'List [Account]' to to print all transactions \n");
                 var input = Console.ReadLine().Split(" ").ToList();
                 logger.Trace("Got user input: "+ input);
                 if (input[0] == "List")

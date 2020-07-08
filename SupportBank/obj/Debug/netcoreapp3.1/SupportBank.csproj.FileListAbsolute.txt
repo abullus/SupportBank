@@ -13,3 +13,4 @@ C:\Work\Training\SupportBank\SupportBank\SupportBank\obj\Debug\netcoreapp3.1\Sup
 C:\Work\Training\SupportBank\SupportBank\SupportBank\obj\Debug\netcoreapp3.1\SupportBank.genruntimeconfig.cache
 C:\Work\Training\SupportBank\SupportBank\SupportBank\bin\Debug\netcoreapp3.1\NLog.dll
 C:\Work\Training\SupportBank\SupportBank\SupportBank\obj\Debug\netcoreapp3.1\SupportBank.csproj.CopyComplete
+C:\Work\Training\SupportBank\SupportBank\SupportBank\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

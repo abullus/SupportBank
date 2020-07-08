@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "hbjVrlVEzM8I67xb7j0EwPBKSJC83VTTXr1t9LHji49p2ooSEIR+ms2V3Y/aOrdmrKsuBbtWokkYFPO7SHyj7w==",
+  "dgSpecHash": "r974eGyAbD8Tv3r2DAgk2bX9wJh3HOWydsNw8+FHv32AT1thLHujOyhqeRmM1dqXkG6jmW2R3AlLKNenKrcHEA==",
   "success": true,
   "projectFilePath": "C:\\Work\\Training\\SupportBank\\SupportBank\\SupportBank\\SupportBank.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\alfbul\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\alfbul\\.nuget\\packages\\nlog\\4.7.2\\nlog.4.7.2.nupkg.sha512"
   ],
   "logs": []
