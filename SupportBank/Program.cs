@@ -21,13 +21,11 @@ namespace SupportBank
             logger.Info("Program Initiated");
             
             var peopleDictionaryCreator = new PeopleDictionaryCreator();
-            
-            peopleDictionaryCreator.AddStringsToDictionary(new CsvReader(@"C:\Work\Training\SupportBank\Transactions2014.csv").TransactionList);
-            
-            peopleDictionaryCreator.AddStringsToDictionary(new CsvReader(@"C:\Work\Training\SupportBank\DodgyTransactions2015.csv").TransactionList);
-            
+            var csvReader = new CsvReader();
+            csvReader.AddCSVFile(@"C:\Work\Training\SupportBank\Transactions2014.csv");
+            csvReader.AddCSVFile(@"C:\Work\Training\SupportBank\DodgyTransactions2015.csv");
+
             logger.Info("Added all data to dictionary");
-            var peopleDictionary = peopleDictionaryCreator.PeopleDictionary;
             while (true)
             {
                 Console.Write(
@@ -39,8 +37,8 @@ namespace SupportBank
                     input.Remove("List");
                     var inputName = string.Join(" ", input.ToArray());
                     
-                    if (inputName == "All") PrintAllBalances(peopleDictionary);
-                    else if (peopleDictionary.ContainsKey(inputName)) PrintTransactions(peopleDictionary[inputName]);
+                    if (inputName == "All") PrintAllBalances(PeopleDictionaryCreator.PeopleDictionary);
+                    else if (PeopleDictionaryCreator.PeopleDictionary.ContainsKey(inputName)) PrintTransactions(PeopleDictionaryCreator.PeopleDictionary[inputName]);
                     else Console.Write("\nPlease enter a valid name");
                 }
                 else Console.Write("\nPlease enter a valid command");
