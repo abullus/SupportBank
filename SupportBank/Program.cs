@@ -1,22 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 namespace SupportBank
 {
     internal class Program
     {
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        
         private static void Main()
         {
+            var config = new LoggingConfiguration();
+            var target = new FileTarget { FileName = @"C:\Work\Training\SupportBank\SupportBank.log", Layout = @"${longdate} ${level} - ${logger}: ${message}" };
+            config.AddTarget("File Logger", target);
+            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
+            LogManager.Configuration = config;
+            logger.Info("Program Initiated");
+            
             var peopleDictionaryCreator = new PeopleDictionaryCreator();
+            
             peopleDictionaryCreator.AddStringsToDictionary(new CsvReader(@"C:\Work\Training\SupportBank\Transactions2014.csv").TransactionList);
-            //peopleDictionaryCreator.AddStringsToDictionary(new Csvreader(@"C:\Work\Training\SupportBank\DodgyTransactions2015").TransactionList);
+            
+            peopleDictionaryCreator.AddStringsToDictionary(new CsvReader(@"C:\Work\Training\SupportBank\DodgyTransactions2015.csv").TransactionList);
+            
+            logger.Info("Added all data to dictionary");
             var peopleDictionary = peopleDictionaryCreator.PeopleDictionary;
             while (true)
             {
                 Console.Write(
                     "\n\nType: \n'List All' To output all people and amounts \n'List [Account]' to to print all transactions \n");
                 var input = Console.ReadLine().Split(" ").ToList();
+                logger.Trace("Got user input: "+ input);
                 if (input[0] == "List")
                 {
                     input.Remove("List");
@@ -27,11 +44,13 @@ namespace SupportBank
                     else Console.Write("\nPlease enter a valid name");
                 }
                 else Console.Write("\nPlease enter a valid command");
+                logger.Info($"{input[0]} processed");
             }
         }
 
         private static void PrintAllBalances(Dictionary<string, Person> dict)
         {
+            logger.Debug("PrintAllBalances called");
             Console.Write("Here are the balances for all people:");
             foreach (var i in dict)
             {
@@ -43,6 +62,7 @@ namespace SupportBank
 
         private static void PrintTransactions(Person person)
         {
+            logger.Debug($"PrintTransactions for: {person} called");
             Console.Write($"Here are the transactions for {person.Name}:");
             foreach (var transaction in person.Transactions)
                 Console.Write("\n\nDate: " + transaction.Date +

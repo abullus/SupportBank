@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using NLog;
 
 namespace SupportBank
 {
     public class Person
     {
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        
         public float Balance;
         public readonly string Name;
         public readonly List<Transaction> Transactions;
@@ -17,6 +20,7 @@ namespace SupportBank
         public void ChangeBalance(float value)
         {
             Balance += value;
+            logger.Trace("Changed balance");
         }
     }
 }
