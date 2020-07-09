@@ -18,9 +18,12 @@ namespace SupportBank
             var peopleDictionaryCreator = new PeopleDictionaryCreator();
             var csvReader = new CsvReader();
             var jsonReader = new JsonReader();
+            var xmlReader = new XmlReader();
             peopleDictionaryCreator.AddListToDict(jsonReader.CreateTransactionList(@"C:\Work\Training\SupportBank\Transactions2013.json"));
             peopleDictionaryCreator.AddListToDict(csvReader.CreateTransactionList(@"C:\Work\Training\SupportBank\Transactions2014.csv"));
             peopleDictionaryCreator.AddListToDict(csvReader.CreateTransactionList(@"C:\Work\Training\SupportBank\DodgyTransactions2015.csv"));
+            peopleDictionaryCreator.AddListToDict(xmlReader.CreateTransactionList(@"C:\Work\Training\SupportBank\Transactions2012.xml"));
+            
             logger.Info("Added all data to dictionary");
             
             while (true)
